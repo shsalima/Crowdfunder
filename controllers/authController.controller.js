@@ -30,7 +30,7 @@ export const registerUser =async(req,res)=>{
     res.status(201).json({newUser,token})
 
     }catch(err){
-        res.status(5000).json({msg:err.message})
+        res.status(500).json({msg:err.message})
     }
 
 
