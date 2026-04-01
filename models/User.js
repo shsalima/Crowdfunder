@@ -18,7 +18,7 @@ const userSchema= new mongoose.Schema({
     },
     role:{
         type:String,
-        enum:["admin","project owner","Investor"],
+        enum:["admin","project owner","ivestor"],
         default:"project owner",
         required:true,
     }

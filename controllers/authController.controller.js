@@ -2,7 +2,7 @@ import User from "../models/User.js"
 
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import dotenv  from "dotenv";
+
 
 export const registerUser =async(req,res)=>{
     const {name,email,password,role}=req.body
@@ -35,3 +35,33 @@ export const registerUser =async(req,res)=>{
 
 
 }
+
+export const login=async (req,res)=>{
+    try{
+        const {email,password,role}=req.body
+
+        const userEmail=await User.findOne({email})
+        if(!userEmail){
+            return res.status(404).json({message:"email user ne trouve pas"})
+
+        }
+        const verfiPwd=await bcrypt.compare(password,userEmail.password)
+        if(!verfiPwd){
+            return res.status(400).json({message:"passeword incorrecte"})
+        }
+
+        const tokenLogin=jwt.sign(
+            {
+                userId:userEmail._id,
+                role:userEmail.role
+            },
+            process.env.JWT_SECRET,
+            {expiresIn:"7d"}
+        )
+        res.status(200).json({message:"login success",tokenLogin,userEmail})
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
+
