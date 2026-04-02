@@ -57,3 +57,53 @@ export const checkAdminExists = async (req, res, next) => {
         res.status(500).json({ message: "Erreur serveur", error: err.message })
     }
 }
+
+
+
+export const registerValidation = [
+
+    body("name")
+    .notEmpty()
+    .withMessage("name obligatoire"),
+
+    body("email")
+    .isEmail()
+    .withMessage("email invalide"),
+
+    body("password")
+    // au moins 6
+    .isLength({min:6})
+    .withMessage("password doit avoir au moins 6 caractères"),
+
+    body("role")
+    // ila user madakhlch role machi mochil kamel
+    .optional()
+    .isIn(["ivestor","admin","project owner"])
+    .withMessage("role doit être user ou admin")
+
+]
+
+// validation dyal login
+export const loginValidation = [
+
+    body("email")
+    .isEmail()
+    .withMessage("email invalide"),
+
+    body("password")
+    .notEmpty()
+    .withMessage("password obligatoire")
+
+]
+
+// middleware kaychecki errors
+export const validate = (req,res,next)=>{
+
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors:errors.array()})
+    }
+
+    next()
+}
