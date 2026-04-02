@@ -1,6 +1,6 @@
-import {body,validationResult} from "express-validator"
+// import {body,validationResult} from "express-validator"J
 import jwt from "jsonwebtoken"
-import User from "../models/User"
+import User from "../models/User.js"
 
 
 
@@ -22,12 +22,6 @@ export const verferToken=(req,res,next)=>{
     }
 }
 
-export const isAdmin=(req,res,next)=>{
-    if(req.user.role !=="admin"){
-
-    }
-}
-
 
 export const checkEmail= async(req,res,next)=>{
     try{
@@ -44,4 +38,22 @@ export const checkEmail= async(req,res,next)=>{
     }
 
 
+}
+export const checkAdminExists = async (req, res, next) => {
+    try {
+        const { role } = req.body
+
+        if (role === "admin") {
+            const adminExist = await User.findOne({ role: "admin" })
+            if (adminExist) {
+                // 400 => bad req
+                return res.status(400).json({ message: "Admin déjà créé" })
+            }
+        }
+
+        next() 
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: "Erreur serveur", error: err.message })
+    }
 }
