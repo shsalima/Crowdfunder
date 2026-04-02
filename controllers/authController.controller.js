@@ -21,7 +21,7 @@ export const registerUser =async(req,res)=>{
             role
         })
         const token=jwt.sign({
-            userId:newUseruser._id,
+            userId:newUser._id,
             role:newUser.role
         },
         process.env.JWT_SECRET,
