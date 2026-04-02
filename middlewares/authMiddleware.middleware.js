@@ -57,6 +57,17 @@ export const checkAdminExists = async (req, res, next) => {
         res.status(500).json({ message: "Erreur serveur", error: err.message })
     }
 }
+export const isAdmin = (req, res, next) => {
+    // req.user khdinah mn middleware verifyToken
+    if (req.user.role !== "admin") {
+        // 403=> Forbidden
+        return res.status(403).json({ message: "Non autorisé, seulement admin" })
+    }
+    next()
+
+
+
+}
 
 
 
