@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import router from "./routes/authRoute.route.js"
+import projectRoutes from "./routes/projectRoute.js"
 
 dotenv.config()
 
@@ -9,6 +10,7 @@ const app=express()
 
 app.use(express.json())
 app.use("/api/auth",router)
+app.use("/api/project",projectRoutes)
 
 
 const mongodb_url=process.env.MON_URL

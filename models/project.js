@@ -13,6 +13,15 @@ const projectSchema=new mongoose.Schema({
         type:Number,
         required:true
     },
+
+    currentAmount: { 
+        type: Number,
+         default: 0
+         }, 
+    maxPercentPerInvestor: { 
+        type: Number,
+         default: 20 
+        },
     owner:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
