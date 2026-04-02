@@ -34,3 +34,21 @@ export const getAllProjects = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+
+export const getProjectById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const project = await Project.findById(id)
+            .populate("owner", "name email role");
+
+        if (!project) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+
+        res.status(200).json(project);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
