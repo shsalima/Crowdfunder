@@ -26,6 +26,42 @@ export const createProjectValidation = [
         .custom(value => value > 0 && value <= 50) 
         .withMessage("Max percent par investisseur doit être entre 1 et 50")
 ];
+export const onlyOwner = (req, res, next) => {
+    if (req.user.role !== "owner") {
+        return res.status(403).json({ message: "seulemnt owner qui crée les projects" });
+    }
+    next();
+};
+
+
+import Project from "../models/project.js";
+
+export const isProjectOwner = async (req, res, next) => {
+    try {
+        const project = await Project.findById(req.params.id);
+
+        if (!project) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+
+        if (project.owner.toString() !== req.user.userId) {
+            return res.status(403).json({ message: "Not authorized" });
+        }
+
+        req.project = project; // kankhazno projet 7it ghadi nsta3mloh f controller
+                next();
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+export const isProjectOpen = (req, res, next) => {
+    if (req.project.status === "closed") {
+        return res.status(400).json({ message: "Project is closed" });
+    }
+    next();
+};
 
 
 export const validateCreateProject = (req, res, next) => {
