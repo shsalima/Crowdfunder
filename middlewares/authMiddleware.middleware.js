@@ -19,8 +19,29 @@ export const verferToken=(req,res,next)=>{
     }catch(err){
         res.status(401).json({message:"Token invalid"})
 
+    }
+}
 
-
+export const isAdmin=(req,res,next)=>{
+    if(req.user.role !=="admin"){
 
     }
+}
+
+
+export const checkEmail= async(req,res,next)=>{
+    try{
+        const {email}=req.body
+
+        const emailEsxist=await User.findOne({email})
+        if(emailEsxist){
+            res.status(500).json({message:"déjà exist cette email"})
+        }
+        next()
+
+    }catch(err){
+        res.status(500).json({ message: "Erreur serveur", error: err.message })
+    }
+
+
 }
