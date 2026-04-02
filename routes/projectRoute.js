@@ -1,7 +1,7 @@
 import express from "express";
 import { validate, verferToken } from "../middlewares/authMiddleware.middleware.js";
-import { createProject, getAllProjects, getProjectById } from "../controllers/projectController.controller.js";
-import { createProjectValidation, onlyOwner } from "../middlewares/projectMiddleware.middleware.js";
+import { createProject, deleteProject, getAllProjects, getProjectById, updateProject } from "../controllers/projectController.controller.js";
+import { createProjectValidation, isProjectOpen, isProjectOwner, onlyOwner } from "../middlewares/projectMiddleware.middleware.js";
 
 
 const projectRoutes=express.Router()
@@ -10,7 +10,8 @@ projectRoutes.post("/create",verferToken,onlyOwner,createProjectValidation,creat
 
 projectRoutes.get("/",verferToken,getAllProjects)
 projectRoutes.get("/:id",verferToken,getProjectById)
-
+projectRoutes.put("/",verferToken,isProjectOwner,isProjectOpen,updateProject)
+projectRoutes.delete("/",verferToken,isProjectOwner,deleteProject)
 
 
 

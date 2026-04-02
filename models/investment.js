@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Project from "./project";
 
 const investmentSchema=new mongoose.Schema({
-    user:{
+    investor:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true
