@@ -79,9 +79,9 @@ export const updateProject = async (req, res) => {
         project.description = description || project.description;
         project.capital = capital || project.capital;
 
-        if (maxPercentPerInvestor) {
-            project.maxPercentPerInvestor = Math.min(maxPercentPerInvestor, 10);
-        }
+        // if (maxPercentPerInvestor) {
+        //     project.maxPercentPerInvestor = Math.min(maxPercentPerInvestor, 10);
+        // }
 
         await project.save();
 

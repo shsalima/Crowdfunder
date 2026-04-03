@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Project from "./project";
+import Project from "./project.js";
 
 const investmentSchema=new mongoose.Schema({
     investor:{
@@ -7,7 +7,7 @@ const investmentSchema=new mongoose.Schema({
         ref:"User",
         required:true
     },
-    Project:{
+    project:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Project",
         required:true

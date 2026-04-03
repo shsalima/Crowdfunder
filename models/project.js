@@ -20,7 +20,7 @@ const projectSchema=new mongoose.Schema({
          }, 
     maxPercentPerInvestor: { 
         type: Number,
-         default: 20 
+         default: 50 
         },
     owner:{
         type:mongoose.Schema.Types.ObjectId,

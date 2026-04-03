@@ -1,9 +1,9 @@
 import express from "express";
-import { checkBalance, verferToken } from "../middlewares/authMiddleware.middleware";
-import { validateInvestment } from "../middlewares/investment.middleware";
-import { checkProject } from "../middlewares/projectMiddleware.middleware";
-import { checkMaxPercent } from "../middlewares/maxPercent.middleware";
-import { investInProject } from "../controllers/investmentController.controller";
+import { checkBalance, verferToken } from "../middlewares/authMiddleware.middleware.js";
+import { validateInvestment } from "../middlewares/investment.middleware.js";
+import { checkProject } from "../middlewares/projectMiddleware.middleware.js";
+import { checkMaxPercent } from "../middlewares/maxPercent.middleware.js";
+import { investInProject } from "../controllers/investmentController.controller.js";
 
 const investRoute=express.Router()
 

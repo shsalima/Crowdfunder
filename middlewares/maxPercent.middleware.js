@@ -1,9 +1,9 @@
-import res from "express/lib/response"
-import Investment from "../models/investment"
+import express from "express"
+import Investment from "../models/investment.js"
 
 
 
-export const checkMaxPercent =async (req,req,next)=>{
+export const checkMaxPercent =async (req,res,next)=>{
     const {amount}= req.body
     const project=req.project
 

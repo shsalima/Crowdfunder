@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import router from "./routes/authRoute.route.js"
 import projectRoutes from "./routes/projectRoute.js"
 import investRoute from "./routes/investmentRoute.route.js"
+import balanceRoute from "./routes/balanceRoutes.route.js"
 
 dotenv.config()
 
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use("/api/auth",router)
 app.use("/api/project",projectRoutes)
 app.use("/api/investment",investRoute)
+app.use("/api/balance",balanceRoute)
 
 
 const mongodb_url=process.env.MON_URL

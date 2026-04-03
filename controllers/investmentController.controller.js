@@ -1,5 +1,5 @@
-import Investment from "../models/investment";
-import Project from "../models/project";
+import Investment from "../models/investment.js";
+import Project from "../models/project.js";
 
 
 

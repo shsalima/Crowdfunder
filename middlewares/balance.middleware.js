@@ -1,4 +1,4 @@
-import { status } from "express/lib/response.js";
+import express from "express";
 import Balance from "../models/balance.js";
 
 export const checkBalance = async (req, res, next) => {
