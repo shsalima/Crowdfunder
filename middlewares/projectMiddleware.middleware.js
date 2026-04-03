@@ -1,5 +1,7 @@
 import { body, validationResult } from "express-validator";
 
+import Project from "../models/project.js";
+
 
 export const createProjectValidation = [
     body("title")
@@ -27,14 +29,13 @@ export const createProjectValidation = [
         .withMessage("Max percent par investisseur doit être entre 1 et 50")
 ];
 export const onlyOwner = (req, res, next) => {
-    if (req.user.role !== "owner") {
+    if (req.user.role !== "project owner") {
         return res.status(403).json({ message: "seulemnt owner qui crée les projects" });
     }
     next();
 };
 
 
-import Project from "../models/project.js";
 
 export const isProjectOwner = async (req, res, next) => {
     try {

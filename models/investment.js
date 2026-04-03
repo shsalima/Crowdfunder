@@ -15,6 +15,9 @@ const investmentSchema=new mongoose.Schema({
     amount:{
         type:Number,
         required:true
+    },
+     percentage: {
+        type: Number
     }
 },
 {

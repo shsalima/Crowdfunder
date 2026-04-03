@@ -1,6 +1,7 @@
 import { body, validationResult } from "express-validator";
 import jwt from "jsonwebtoken"
 import User from "../models/User.js"
+import Balance from "../models/balance.js";
 
 
 
@@ -99,6 +100,32 @@ export const loginValidation = [
     .withMessage("password obligatoire")
 
 ]
+
+
+
+
+
+export const checkBalance = async (req, res, next) => {
+    try {
+        const { amount } = req.body;
+
+        const balance = await Balance.findOne({ user: req.user.userId });
+
+        if (!balance) {
+            return res.status(400).json({ message: "Balance not found" });
+        }
+
+        if (balance.amount < amount) {
+            return res.status(400).json({ message: "Insufficient balance" });
+        }
+
+        req.balance = balance; //bach nsta3mloh f controller
+        next();
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 // middleware kaychecki errors
 export const validate = (req,res,next)=>{

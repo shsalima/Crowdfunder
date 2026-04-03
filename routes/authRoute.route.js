@@ -5,7 +5,7 @@ import { checkAdminExists, checkEmail, loginValidation, registerValidation, verf
 const router=express.Router()
 
 router.post("/signUp",registerValidation,checkEmail,checkAdminExists,registerUser)
-router.post("/login",loginValidation,verferToken,login)
+router.post("/login",loginValidation,login,verferToken)
 
 
 export default router;
