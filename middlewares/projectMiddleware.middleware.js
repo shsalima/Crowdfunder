@@ -35,6 +35,21 @@ export const onlyOwner = (req, res, next) => {
     next();
 };
 
+export const checkProject = async (req,res,next) => {
+    const project=await Project.findById(req.params.id)
+
+    if(!project){
+        return res.status(404).json({message:"cette project non trouvé"})
+
+    }
+    if(project.status== "closed"){
+        return res.status(400).json({message:"project closed"})
+    }
+    req.project=project
+    next()
+
+}
+
 
 
 export const isProjectOwner = async (req, res, next) => {
