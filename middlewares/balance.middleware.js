@@ -1,5 +1,6 @@
 import express from "express";
 import Balance from "../models/balance.js";
+import res from "express/lib/response.js";
 
 export const checkBalance = async (req, res, next) => {
     try {
@@ -14,3 +15,11 @@ export const checkBalance = async (req, res, next) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+
+export const isInvestor=async (req,res,next)=>{
+    if(req.user.role !=="ivestor"){
+        return res.status(403).json({message:"acces seulement investor"})
+    }
+    next()
+}

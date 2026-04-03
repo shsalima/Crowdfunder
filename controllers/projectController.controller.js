@@ -56,7 +56,7 @@ export const getProjectById = async (req, res) => {
 export const updateProject = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, capital, maxPercentPerInvestor } = req.body;
+        const { title, description, capital } = req.body;
 
         const project = await Project.findById(id);
 

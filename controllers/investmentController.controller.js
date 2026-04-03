@@ -10,7 +10,7 @@ export const investInProject = async (req, res) => {
 
       // const project=await Project.findById
 
-
+    
       try{
             const {amount}= req.body;
             const project=req.project
