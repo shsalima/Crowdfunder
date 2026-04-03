@@ -1,7 +1,7 @@
 import express from "express"
 import { getAllInvestors, getAllOwners, login, registerUser } from "../controllers/authController.controller.js"
 import { checkAdminExists, checkEmail, isAdmin, loginValidation, registerValidation, verferToken } from "../middlewares/authMiddleware.middleware.js"
-import { route } from "express/lib/application.js"
+
 
 const router=express.Router()
 

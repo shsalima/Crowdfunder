@@ -19,7 +19,14 @@ export const investInProject = async (req, res) => {
 
 
             const percentage=(amount / project.capital )* 100
+                
+        if(percentage > project.maxPercentPerInvestor){
+            return res.status(400).json({error : "vous ne pouvez pas dépasser 50 en investissement"})
+        }
 
+        if(amount>balance){
+            return res.status(400).json({message:"ne peut pas invester avec ce montant ,cette montant sépérieur balance"})
+        }
             const investment=await Investment.create({
                   investor:req.user.userId,
                   project:project._id,
