@@ -59,3 +59,26 @@ export const login=async (req,res)=>{
     }
 }
 
+export const getAllInvestors = async (req, res) => {
+    try {
+        const investors = await User.find({ role: "ivestor" })
+            .select("-password");
+
+        res.status(200).json(investors);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+export const getAllOwners = async (req, res) => {
+    try {
+        const owners = await User.find({ role: "owner" })
+            .select("-password");
+
+        res.status(200).json(owners);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
